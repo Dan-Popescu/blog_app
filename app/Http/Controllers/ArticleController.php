@@ -12,7 +12,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::orderBy("created_at","desc")->paginate(10);
+        return view("welcome", ["articles" => $articles]);
     }
 
     /**
@@ -36,7 +37,11 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        $user = $article->user()->select('id','name')->first();
+        $categories = $article->categories()->select('categories.id','categories.name')->get();
+
+        //dd($categories);
+        return view('articles.show',["article" => $article,"user" => $user, "categories"=> $categories]);
     }
 
     /**
