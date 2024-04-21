@@ -13,10 +13,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::query()->select(['id', 'title', 'content', 'created_at'])->latest('created_at')->paginate(10);
+        // $articles = Article::query()->select(['id', 'title', 'content', 'created_at'])->latest('created_at')->paginate(10);
+        // return view('articles.index', ['articles'=> $articles]);
 
-        // dd($articles);
-        return view('articles.index', ['articles'=> $articles]);
+        $articles = Article::orderBy("created_at","desc")->paginate(10);
+        return view("welcome", ["articles" => $articles]);
     }
 
     /**
@@ -84,9 +85,6 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        // dd($request);
-        // dd($article);
-        // validate request
         $validated_data = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
