@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('All articles') }}
+            {{ __('My articles') }}
         </h2>
     </x-slot>
 
@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex justify-between items-center">
-                        <h2 class="text-2xl font-semibold"> {{ __('All articles') }}</h2>
+                        <h2 class="text-2xl font-semibold"> {{ __('My articles') }}</h2>
                     </div>
                         <div class="relative overflow-x-auto">
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

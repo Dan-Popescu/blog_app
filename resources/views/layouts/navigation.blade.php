@@ -18,8 +18,8 @@
                     <x-nav-link :href="route('articles.create')" :active="request()->routeIs('articles.create')">
                         {{ __('Create Article') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.index')">
-                        {{ __('All articles') }}
+                    <x-nav-link :href="route('articles.user')" :active="request()->routeIs('articles.user')">
+                        {{ __('My articles') }}
                     </x-nav-link>
                 </div>
             </div>
