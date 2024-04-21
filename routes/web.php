@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,5 +30,9 @@ Route::middleware('auth')->group(function () {
 // ARTICLES
 Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
+
+// Route::resource('/', ArticleController::class);
+
+// Route::resource('articles', ArticleController::class);
 
 require __DIR__.'/auth.php';
