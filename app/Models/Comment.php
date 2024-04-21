@@ -10,13 +10,17 @@ class Comment extends Model
 {
     use HasFactory;
 
-    public function article(): BelongsTo
+    protected $fillable = ['content'];
+
+    public function article()
     {
         return $this->belongsTo(Article::class);
     }
 
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 }
+
+

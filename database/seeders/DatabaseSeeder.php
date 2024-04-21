@@ -22,8 +22,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Category::factory()->count(5)->create();
+        $this->call([
+            CategoriesTableSeeder::class,
+        ]);
 
-        Article::factory(10)->create();
+
     }
 }
