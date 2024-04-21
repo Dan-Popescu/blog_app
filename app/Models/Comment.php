@@ -9,15 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Comment extends Model
 {
     use HasFactory;
-
     protected $fillable = ['content'];
 
-    public function article()
+    public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

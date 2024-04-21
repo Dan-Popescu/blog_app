@@ -16,21 +16,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
 
 Route::middleware('auth')->group(function () {
     // User profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('articles', ArticleController::class)->only(['create', 'store', 'update', 'destroy', 'edit']);
 
-    // Articles
-    Route::resource('articles', ArticleController::class)->only(['create', 'store', 'update', 'destroy']);
     Route::get('/my-articles', [ArticleController::class, 'userArticles'])->name('articles.user');
 });
-
-// NON PROTECTED ROUTES
-// ARTICLES
 Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
 

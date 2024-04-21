@@ -65,7 +65,6 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        // return view('articles.show', ['article' => $article]);
         $user = $article->user()->select('id','name')->first();
         $categories = $article->categories()->select('categories.id','categories.name')->get();
 

@@ -14,19 +14,18 @@ class Article extends Model
 
     protected $fillable = ['title', 'content'];
 
-    public function comments()
+     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
-
 }
