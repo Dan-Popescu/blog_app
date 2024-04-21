@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ArticleController extends Controller
 {
@@ -12,7 +13,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::query()->select(['id', 'title', 'content', 'created_at'])->latest('created_at')->paginate(10);
+
+        // dd($articles);
+        return view('articles.index', ['articles'=> $articles]);
     }
 
     /**
@@ -20,7 +24,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -28,7 +32,21 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // validate request
+        $validated_data = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        // store article
+        $article = new Article();
+        $article->title = $validated_data['title'];
+        $article->content = $validated_data['content'];
+        $article->user_id = auth()->id();
+        $article->save();
+
+        return redirect()->intended(route('articles.create'))->with('success', 'Article created successfully.');
     }
 
     /**
@@ -36,7 +54,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.show', ['article' => $article]);
     }
 
     /**
@@ -44,7 +62,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit', ['article' => $article]);
     }
 
     /**
@@ -52,7 +70,22 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        // dd($request);
+        // dd($article);
+        // validate request
+        $validated_data = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        // verify if the article belongs to the authenticated user
+        if ($article->user_id !== auth()->id()) {
+            return redirect()->intended(route('articles.index'))->with('error', 'You are not authorized to update this article.');
+        }
+
+        $updated = $article->update($validated_data);
+
+        return redirect()->intended(route('articles.edit', $article))->with('success', 'Article updated successfully.');
     }
 
     /**
@@ -60,6 +93,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->intended(route('articles.index'))->with('success', 'Article deleted successfully.');
     }
 }
