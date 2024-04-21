@@ -21,6 +21,16 @@ class ArticleController extends Controller
     }
 
     /**
+     * Display user articles
+     */
+    public function userArticles(){
+        $articles = Article::query()->where('user_id', auth()->id())->select(['id', 'title', 'content', 'created_at'])->latest('created_at')->paginate(10);
+
+        return view('articles.user', ['articles'=> $articles]);
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

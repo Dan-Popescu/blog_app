@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
 
     // Articles
     // Route::resource('articles', ArticleController::class)->only(['create', 'store', 'update', 'destroy']);
-
+    Route::get('/my-articles', [ArticleController::class, 'userArticles'])->name('articles.user');
 });
 
 // NON PROTECTED ROUTES
