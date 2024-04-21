@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Comment extends Model
 {
     use HasFactory;
+    protected $fillable = ['content'];
 
     public function article(): BelongsTo
     {
@@ -19,4 +20,9 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
+
 }
+
+
