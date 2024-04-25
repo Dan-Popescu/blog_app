@@ -101,6 +101,7 @@
                                 </a>
                                 @endforeach
                             </ul>
+                            {{ $articles->links() }}
 
                         </div>
                 </div>
@@ -110,6 +111,6 @@
 
 </x-app-layout>
 
-{{ $articles->links() }}
+
 
 

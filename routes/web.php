@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('articles', ArticleController::class)->only(['create', 'store', 'update', 'destroy', 'edit']);
 
     Route::get('/my-articles', [ArticleController::class, 'userArticles'])->name('articles.user');
-    Route::resource('comments', CommentController::class)->only(['store', 'destroy', 'edit']);
+    Route::resource('comments', CommentController::class)->only(['store', 'destroy', 'edit', 'update']);
 });
 Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 

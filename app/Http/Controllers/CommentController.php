@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
 {
@@ -56,7 +57,7 @@ class CommentController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        return view('comments.edit', ['comment' => $comment]);
     }
 
     /**
@@ -64,7 +65,19 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        if ($comment->user_id !== auth()->id()) {
+            return back()->with('error', 'You are not authorized to edit this comment.');
+        }
+
+        $validated_data = $request->validate([
+            'content' => 'required|string'
+        ]);
+
+        $comment->update([
+            'content' => $validated_data['content']
+        ]);
+
+        return Redirect::route('articles.show', $comment->article_id)->with('success', 'Comment updated successfully.');
     }
 
     /**

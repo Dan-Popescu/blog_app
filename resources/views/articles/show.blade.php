@@ -45,10 +45,11 @@
                                     <span class="text-gray-600 text-sm">{{ date('\L\e d/m/Y à h:i', strtotime($comment->created_at)); }}</span>
                                 </div>
                                 @if ($comment->user_id == Auth::id())
+                                <a href="{{route('comments.edit', ['comment'=>$comment])}}" class="w-24 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Update</a>
                                 <form action="{{route('comments.destroy', ['comment'=>$comment])}}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button class="w-24 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">DELETE</button>
+                                    <button class="w-24 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
                                 </form>
                                 
                                 @endif
