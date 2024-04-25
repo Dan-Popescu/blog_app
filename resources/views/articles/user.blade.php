@@ -16,15 +16,23 @@
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr >
-                                    <th scope="col" class="px-6 py-3 items-center ">Title</th>
-                                    <th scope="col" class="px-6 py-3 items-center ">Content</th>
-                                    <th scope="col" class="px-6 py-3 flex justify-center">Actions</th>
+                                    <th scope="col" class="px-6 py-3 items-center ">{{__("Title")}}</th>
+                                    <th scope="col" class="px-6 py-3 items-center ">{{__("Category")}}</th>
+                                    <th scope="col" class="px-6 py-3 items-center ">{{__("Content")}}</th>
+                                    <th scope="col" class="px-6 py-3 flex justify-center">{{__("Actions")}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($articles as $article)
                                         <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             <td class="px-4 py-2 ">{{ $article->title }}</td>
+                                            <td class="px-4 py-2 ">
+                                                {{-- Display all categories related to the article --}}
+                                                @foreach ($article->categories as $category)
+                                                    <span class="bg-gray-200 dark:bg-gray-700 dark:text-gray-400 text-gray-900 px-2 py-1.5 rounded-lg me-1.5">{{ $category->name }}</span>
+                                                @endforeach
+                                                {{-- {{ $article->category->name }} --}}
+                                            </td>
                                             <td class=" px-4 py-2 ">{{ Str::limit($article->content, 100) }}...</td>
 
                                             <td class=" px-4 py-2 flex justify-center">

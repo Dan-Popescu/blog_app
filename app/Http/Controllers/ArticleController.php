@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -24,7 +25,9 @@ class ArticleController extends Controller
      * Display user articles
      */
     public function userArticles(){
-        $articles = Article::query()->where('user_id', auth()->id())->select(['id', 'title', 'content', 'created_at'])->latest('created_at')->paginate(10);
+        $articles = Article::query()->where('user_id', auth()->id())->select(['id', 'title', 'content', 'created_at'])->latest('created_at')->with('categories')->paginate(10);
+
+        // dd($articles);
 
         return view('articles.user', ['articles'=> $articles]);
     }
@@ -35,7 +38,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        return view('articles.create', ['categories' => Category::all()]);
     }
 
     /**
@@ -46,9 +49,14 @@ class ArticleController extends Controller
 
         // validate request
         $validated_data = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title' => ['bail', 'required', 'string', 'max:255', 'regex:/^[^0-9].*/'],
+            'content' => 'bail|required|string',
+            'categories' => 'bail|required|array',
+            'categories.*' => ['bail', 'required', Rule::in(Category::query()->pluck('id')->toArray())]
         ]);
+
+        // dd($validated_data);
+
 
         // store article
         $article = new Article();
@@ -56,6 +64,11 @@ class ArticleController extends Controller
         $article->content = $validated_data['content'];
         $article->user_id = auth()->id();
         $article->save();
+
+        // attach category to article
+        foreach ($validated_data['categories'] as $category) {
+            $article->categories()->attach($category);
+        }
 
         return redirect()->intended(route('articles.create'))->with('success', 'Article created successfully.');
     }
