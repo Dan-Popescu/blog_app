@@ -37,10 +37,9 @@
                         </x-nav-link>
                     @endif
                     @endauth
-                    @component('components.language-selector')
-                    @endcomponent
+                    
                 </div>
-
+                
                 {{-- @else
 
                 <div class="shrink-0 flex items-center">
@@ -55,6 +54,8 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                @component('components.language-selector')
+                @endcomponent
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
 

@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 
 class ArticleController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -17,7 +18,7 @@ class ArticleController extends Controller
         // $articles = Article::query()->select(['id', 'title', 'content', 'created_at'])->latest('created_at')->paginate(10);
         // return view('articles.index', ['articles'=> $articles]);
 
-        $articles = Article::orderBy("created_at","desc")->paginate(10);
+        $articles = Article::orderBy("created_at", "desc")->with('categories')->paginate(10);
         return view("articles.index", ["articles" => $articles]);
     }
 
@@ -87,7 +88,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         $user = $article->user()->select('id','name')->first();
-        $categories = $article->categories()->select('categories.id','categories.name')->get();
+        $categories = $article->categories()->select('categories.id','categories.name','categories.color')->get();
         $comments = $article->comments()
             ->join('users', 'comments.user_id', '=', 'users.id')
             ->select('comments.id', 'comments.content', 'comments.created_at', 'users.name as user_name', 'users.id as user_id')

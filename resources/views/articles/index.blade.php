@@ -1,3 +1,18 @@
+@php
+    function isColorDark($hexColor) {
+        // Convert hex to RGB
+        $r = hexdec(substr($hexColor, 0, 2));
+        $g = hexdec(substr($hexColor, 2, 2));
+        $b = hexdec(substr($hexColor, 4, 2));
+    
+        // Calculate luminance
+        $luminance = (0.2126 * $r + 0.7152 * $g + 0.0722 * $b) / 255;
+    
+        // If luminance is less than 0.5, color is dark
+        return $luminance < 0.5;
+    }
+@endphp
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -13,43 +28,6 @@
                         <h2 class="text-2xl font-semibold"> {{ __('All articles') }}</h2>
                     </div>
                         <div class="relative overflow-x-auto">
-                            {{-- <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr >
-                                    <th scope="col" class="px-6 py-3 items-center ">Title</th>
-                                    <th scope="col" class="px-6 py-3 items-center ">Content</th>
-                                    <th scope="col" class="px-6 py-3 flex justify-center">Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($articles as $article)
-                                        <tr scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <td class="px-4 py-2 ">{{ $article->title }}</td>
-                                            <td class=" px-4 py-2 ">{{ Str::limit($article->content, 100) }}...</td>
-
-                                            <td class=" px-4 py-2 flex justify-center">
-                                                <a href="{{route('articles.edit', ['article'=>$article])}}" class="w-24 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Update</a>
-                                               
-                                                <form action="{{ route('articles.destroy', ['article'=>$article]) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="w-24 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                                <div class="w-full">
-                                    <div class="my-16 flex justify-center items-center">
-                                        @if (session('success'))
-                                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                                                <strong class="font-bold">Success!</strong>
-                                                <span class="block sm:inline">{{ session('success') }}</span>
-                                            </div>
-                                        @endif
-                                        </div>
-                                </div>
-                            </table> --}}
 
                             <form class="max-w-lg mx-auto">
                                 <div class="flex">
@@ -89,14 +67,23 @@
                             <ul class="mt-12">
                                 @foreach ($articles as $article)
                                 <a href="{{route('articles.show', ['article' => $article->id])}}">
-                                    <li class="bg-blue-50 rounded-lg p-2 m-2 grid grid-cols-5 hover:bg-blue-100">
-                                        
-                                        <h3 class="col-span-3">{{ $article->title }}</h3>
-                                        {{-- <p class="col-span-2">{{ $article->content }}</p> --}}
-                                        <p>{{ $article->category_id }}</p>
-                                        <div class="flex flex-row justify-end">
-                                            <span>Date {{ $article->created_at }}</span>
+                                    <li class="bg-blue-50 rounded-lg p-2 m-2 flex flex-col hover:bg-blue-100">
+                                        <div>
+                                            @foreach ($article->categories as $category)
+                                            <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>
+                                            @endforeach
                                         </div>
+                                        
+                                        <div class="grid grid-cols-5">
+                                            <h3 class="col-span-3 font-bold">{{ $article->title }}</h3>
+                                            {{-- <p class="col-span-2">{{ $article->content }}</p> --}}
+                                            <p>{{ $article->category_id }}</p>
+                                            <div class="flex flex-row justify-end">
+                                                <span class="text-sm ">{{ date('d/m/Y h:i', strtotime($article->created_at)) }}</span>
+                                            </div>
+                                        </div>
+                                        
+                                        
                                     </li>
                                 </a>
                                 @endforeach
