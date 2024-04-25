@@ -11,7 +11,7 @@
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <div class="flex justify-center items-center my-8">
-                            <h2 class="text-2xl font-semibold"> {{ __('New Article') }}</h2>
+                            <h2 class="text-2xl font-semibold"> {{ __('New article') }}</h2>
                         </div>
                         <form method="post" action="{{ route('articles.store') }}" class="flex flex-col items-center justify-center">
                             @csrf
@@ -37,7 +37,7 @@
                                         <div class="flex flex-wrap flex-row justify-between w-full">
                                             @foreach ($categories as $category)
                                                 <div class="w-48 flex items-center gap-3">
-                                                    <input type="checkbox" name="categories[]" value="{{$category->id}}" class="whitespace-nowrap rounded-sm w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">{{$category->name}}</input>
+                                                    <input type="checkbox" name="categories[]" value="{{$category->id}}" class="whitespace-nowrap rounded-sm w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">{{__($category->name)}}</input>
                                                 </div>
                                             @endforeach
                                         </div>

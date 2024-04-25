@@ -3,35 +3,30 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\LanguageController;
 
-Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-    ], function() {
-        Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('lang/{lang}', [LanguageController::class, 'changeLanguage'])->name('lang.switch');
 
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('dashboard');
-        
-        
-        Route::middleware('auth')->group(function () {
-            // User profile
-            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-            Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-            Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-            Route::resource('articles', ArticleController::class)->only(['create', 'store', 'update', 'destroy', 'edit']);
-        
-            Route::get('/my-articles', [ArticleController::class, 'userArticles'])->name('articles.user');
-        });
-        Route::resource('articles', ArticleController::class)->only(['index', 'show']);
-        
-    });
+Route::middleware('locale')->group(function () {
+    Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
 
-Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
+
+Route::middleware(['auth', 'locale'])->group(function () {
+    // User profile
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('articles', ArticleController::class)->only(['create', 'store', 'update', 'destroy', 'edit']);
+
+    Route::get('/my-articles', [ArticleController::class, 'userArticles'])->name('articles.user');
+});
+Route::resource('articles', ArticleController::class)->only(['index', 'show']);
+        
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
