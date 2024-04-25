@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
@@ -24,6 +25,7 @@ Route::middleware(['auth', 'locale'])->group(function () {
     Route::resource('articles', ArticleController::class)->only(['create', 'store', 'update', 'destroy', 'edit']);
 
     Route::get('/my-articles', [ArticleController::class, 'userArticles'])->name('articles.user');
+    Route::resource('comments', CommentController::class)->only(['store', 'destroy', 'edit', 'update']);
 });
 Route::resource('articles', ArticleController::class)->only(['index', 'show']);
         
