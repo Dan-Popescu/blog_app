@@ -22,7 +22,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Category::factory()->count(5)->create();
+        User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@blog.com',
+            'is_admin' => true,
+        ]);
 
         Article::factory(10)->create();
 

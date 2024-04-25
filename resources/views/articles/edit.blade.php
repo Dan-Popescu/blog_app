@@ -63,6 +63,5 @@
 <script>
     function updateArticleField(event, field:string) {
         $article[field] = event.target.value;
-        // Now you can use the `title` variable in your JavaScript code
     }
 </script>
