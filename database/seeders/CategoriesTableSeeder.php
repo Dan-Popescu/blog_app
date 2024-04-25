@@ -45,7 +45,6 @@ class CategoriesTableSeeder extends Seeder
             '4X',
             'Artillery',
             'Multiplayer Online Battle Arena',
-            'Battle Royale',
             'Collectible Card Game',
             'Dungeon Crawler',
             'Hero Shooter',
@@ -62,15 +61,13 @@ class CategoriesTableSeeder extends Seeder
             'Simulation',
             'Sports',
             'Stealth',
-            'Strategy',
-            'Survival',
-            'Survival Horror',
-            'Tactical Shooter',
             'Third-person Shooter',
             'Tower Defense',
             'Turn-based Strategy',
             'Visual Novel',
         ];
+
+        $categories = array_unique($categories);
 
         foreach ($categories as $category) {
             \App\Models\Category::create([

@@ -67,5 +67,19 @@
     "Remember me" : "Se souvenir de moi",
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one." : "Mot de passe oublié ? Pas de problème. Indiquez-nous simplement votre adresse e-mail et nous vous enverrons un lien de réinitialisation du mot de passe par e-mail qui vous permettra d'en choisir un nouveau.",
     "Email Password Reset Link" : "Envoyer le lien de réinitialisation du mot de passe par e-mail",
-    "Already registered?" : "Déjà inscrit ?"
+    "Already registered?" : "Déjà inscrit ?",
+    "Log in" : "Se connecter",
+    "All categories" : "Toutes les catégories",
+    "Create new category" : "Créer une nouvelle catégorie",
+    "Delete a category" : "Supprimer une catégorie",
+    "New category" : "Nouvelle catégorie",
+    "Delete categories" : "Supprimer des catégories",
+    "Delete" : "Supprimer",
+    "Manage users" : "Gérer les utilisateurs",
+    "All users" : "Tous les utilisateurs",
+    "Actions" : "Actions",
+    "Update" : "Mettre à jour",
+    "Update user" : "Mettre à jour l'utilisateur",
+    "Profile Information" : "Informations de profil",
+    "Manage categories" : "Gérer les catégories"
 }

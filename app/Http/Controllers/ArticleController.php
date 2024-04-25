@@ -32,6 +32,14 @@ class ArticleController extends Controller
         return view('articles.user', ['articles'=> $articles]);
     }
 
+    /**
+     * Manage categories
+     */
+    public function categories(){
+        $categories = Category::all();
+        return view('articles.categories', ['categories' => $categories]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

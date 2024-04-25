@@ -18,15 +18,27 @@
                         {{ __('All articles') }}
                     </x-nav-link>
                     @auth
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('articles.create')" :active="request()->routeIs('articles.create')">
-                        {{ __('New article') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('articles.user')" :active="request()->routeIs('articles.user')">
-                        {{ __('My articles') }}
-                    </x-nav-link>
+                    {{-- Display user details : whether it's an admin or not --}}
+                    @if (Auth::user()->is_admin)
+                        {{-- User is admin --}}
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('categories.manage.*')">
+                            {{ __('Manage users') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('categories.manage')" :active="request()->routeIs('categories.manage.*')">
+                            {{ __('Manage categories') }}
+                        </x-nav-link>
+                    @else
+                        {{-- User is not admin --}}
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('articles.create')" :active="request()->routeIs('articles.create')">
+                            {{ __('New article') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('articles.user')" :active="request()->routeIs('articles.user')">
+                            {{ __('My articles') }}
+                        </x-nav-link>
+                    @endif
                     @endauth
                     @component('components.language-selector')
                     @endcomponent
