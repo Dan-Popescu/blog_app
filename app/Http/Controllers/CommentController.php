@@ -28,7 +28,19 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated_data = $request->validate([
+            'content' => 'required|string',
+            'article_id' => 'required|integer|exists:articles,id'
+        ]);
+
+
+        Comment::create([
+            'content' => $validated_data['content'],
+            'user_id' => auth()->id(),
+            'article_id' => (int) $validated_data['article_id']
+        ]);
+
+        return back()->with('success', 'Comment created successfully.');
     }
 
     /**
@@ -59,7 +71,11 @@ class CommentController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Comment $comment)
-    {
-        //
+    { 
+        if ($comment->user_id !== auth()->id()) {
+            return back()->with('error', 'You are not authorized to delete this comment.');
+        }
+        $comment->delete();
+        return back()->with('success', 'Comment deleted successfully.');
     }
 }

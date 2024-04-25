@@ -67,9 +67,14 @@ class ArticleController extends Controller
     {
         $user = $article->user()->select('id','name')->first();
         $categories = $article->categories()->select('categories.id','categories.name')->get();
+        $comments = $article->comments()
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->select('comments.id', 'comments.content', 'comments.created_at', 'users.name as user_name', 'users.id as user_id')
+            ->orderBy('comments.created_at', 'desc')
+            ->get();
 
         //dd($categories);
-        return view('articles.show',["article" => $article,"user" => $user, "categories"=> $categories]);
+        return view('articles.show',["article" => $article,"user" => $user, "categories"=> $categories, "comments" => $comments]);
     }
 
     /**

@@ -18,9 +18,9 @@
                         {{ __('All Articles') }}
                     </x-nav-link>
                     @auth
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                     <x-nav-link :href="route('articles.create')" :active="request()->routeIs('articles.create')">
                         {{ __('Create Article') }}
                     </x-nav-link>
