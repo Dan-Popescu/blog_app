@@ -22,14 +22,14 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 overflow-visible shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex justify-between items-center">
                         <h2 class="text-2xl font-semibold"> {{ __('All articles') }}</h2>
                     </div>
-                        <div class="relative overflow-x-auto">
+                        <div class="relative">
 
-                            <form class="max-w-lg mx-auto">
+                            <form class="max-w-full mx-auto mt-6">
                                 <div class="flex">
                                     <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Your Email</label>
                                     <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 " type="button">All categories <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -37,8 +37,16 @@
                                     </svg>
                                     </button>
                                     <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                                        <ul class="py-2 text-sm text-gray-700 " aria-labelledby="dropdown-button">
-                                        <li>
+                                        <ul class="py-2 text-sm text-gray-700 h-40 overflow-y-scroll" aria-labelledby="dropdown-button">
+                                            <li>
+                                                <a href="{{route("articles.index")}}" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">All categories</a>
+                                            </li>
+                                        @foreach ($categories as $category)
+                                            <li>
+                                                <a href="{{route("articles.category",['category'    =>$category])}}" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">{{$category->name}}</a>
+                                            </li>
+                                        @endforeach
+                                        {{-- <li>
                                             <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">Mockups</button>
                                         </li>
                                         <li>
@@ -49,7 +57,7 @@
                                         </li>
                                         <li>
                                             <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">Logos</button>
-                                        </li>
+                                        </li> --}}
                                         </ul>
                                     </div>
                                     <div class="relative w-full">
@@ -67,7 +75,7 @@
                             <ul class="mt-12">
                                 @foreach ($articles as $article)
                                 <a href="{{route('articles.show', ['article' => $article->id])}}">
-                                    <li class="bg-blue-50 rounded-lg p-2 m-2 flex flex-col hover:bg-blue-100">
+                                    <li class="bg-blue-50 rounded-lg p-2 px-3 m-2 flex flex-col hover:bg-blue-100">
                                         <div>
                                             @foreach ($article->categories as $category)
                                             <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>

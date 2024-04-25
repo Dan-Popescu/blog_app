@@ -19,7 +19,17 @@ class ArticleController extends Controller
         // return view('articles.index', ['articles'=> $articles]);
 
         $articles = Article::orderBy("created_at", "desc")->with('categories')->paginate(10);
-        return view("articles.index", ["articles" => $articles]);
+        $categories = Category::all();
+        return view("articles.index", ["articles" => $articles, "categories" => $categories]);
+    }
+
+    /**
+     * Display Articles by Category
+     */
+    public function categoryArticles(Category $category){
+        $articles = $category->articles()->orderBy("created_at", "desc")->with('categories')->paginate(10);
+        $categories = Category::all();
+        return view("articles.index", ["articles" => $articles, "categories" => $categories]);
     }
 
     /**

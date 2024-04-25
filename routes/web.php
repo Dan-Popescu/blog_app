@@ -28,6 +28,7 @@ Route::middleware(['auth', 'locale'])->group(function () {
     Route::resource('comments', CommentController::class)->only(['store', 'destroy', 'edit', 'update']);
 });
 Route::resource('articles', ArticleController::class)->only(['index', 'show']);
+Route::get('/articles/category/{category}', [ArticleController::class, 'categoryArticles'])->name('articles.category');
         
 
 // Route::get('/dashboard', function () {
