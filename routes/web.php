@@ -31,6 +31,8 @@ Route::group(
     });
 
 
+Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
