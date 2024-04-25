@@ -13,12 +13,15 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->has('titlesearch')){
+            $articles = Article::search($request->titlesearch)->orderBy("created_at", "desc")->paginate(10);
+        } else {
+            $articles = Article::orderBy("created_at", "desc")->with('categories')->paginate(10);
+        }
         // $articles = Article::query()->select(['id', 'title', 'content', 'created_at'])->latest('created_at')->paginate(10);
         // return view('articles.index', ['articles'=> $articles]);
-
-        $articles = Article::orderBy("created_at", "desc")->with('categories')->paginate(10);
         $categories = Category::all();
         return view("articles.index", ["articles" => $articles, "categories" => $categories]);
     }
@@ -136,5 +139,14 @@ class ArticleController extends Controller
     {
         $article->delete();
         return redirect()->intended(route('articles.index'))->with('success', 'Article deleted successfully.');
+    }
+
+    public function search(Request $request)
+    {
+        dd($request);
+        $query = $request->input('query');
+        $articles = Article::search($query)->get();
+
+        return view('articles.search', compact('articles'));
     }
 }
