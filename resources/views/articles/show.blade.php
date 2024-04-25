@@ -1,3 +1,18 @@
+@php
+    function isColorDark($hexColor) {
+        // Convert hex to RGB
+        $r = hexdec(substr($hexColor, 0, 2));
+        $g = hexdec(substr($hexColor, 2, 2));
+        $b = hexdec(substr($hexColor, 4, 2));
+    
+        // Calculate luminance
+        $luminance = (0.2126 * $r + 0.7152 * $g + 0.0722 * $b) / 255;
+    
+        // If luminance is less than 0.5, color is dark
+        return $luminance < 0.5;
+    }
+@endphp
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -13,7 +28,7 @@
                         <span>{{date('\L\e d/m/Y à h:i', strtotime($article->created_at));}}</span>
                     </div>
                     @foreach ($categories as $category)
-                            <span class="bg-blue-100 py-0.5 px-2 rounded-md">{{ $category->name }}</span>
+                            <span class="py-0.5 px-2 rounded-md" style="background-color: {{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>
                     @endforeach
                     <div class="relative overflow-x-auto">
                         <p>{{ $article->content }}</p>
