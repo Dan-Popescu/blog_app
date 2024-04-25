@@ -12,9 +12,9 @@ Route::get('lang/{lang}', [LanguageController::class, 'changeLanguage'])->name('
 
 Route::middleware('locale')->group(function () {
     Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
 });
 
 
@@ -27,6 +27,7 @@ Route::middleware(['auth', 'locale'])->group(function () {
     Route::resource('articles', ArticleController::class)->only(['create', 'store', 'update', 'destroy', 'edit']);
 
     Route::get('/my-articles', [ArticleController::class, 'userArticles'])->name('articles.user');
+    Route::resource('comments', CommentController::class)->only(['store', 'edit', 'update', 'destroy']);
 });
 Route::resource('articles', ArticleController::class)->only(['index', 'show']);
         
