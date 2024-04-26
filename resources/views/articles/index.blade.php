@@ -43,7 +43,7 @@
                                             </li>
                                         @foreach ($categories as $category)
                                             <li class="px-4 py-2 hover:bg-gray-100">
-                                                <a href="{{route("articles.category",['category'=>$category])}}" class="inline-flex w-full  py-0.5 px-2 rounded-md  " style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{$category->name}}</a>
+                                                <a href="{{route("articles.category",['category'=>$category])}}" class="inline-flex w-full  py-0.5 px-2 rounded-md  " style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "white" : "black"}}">{{$category->name}}</a>
                                             </li>
                                         @endforeach
                                         </ul>
