@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Faker\Factory as Faker;
 
 return new class extends Migration
 {
@@ -14,7 +15,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('color')->default('#000000');
+            $table->string('color')->default("#a6f2ff");
             $table->timestamps();
         });
     }
