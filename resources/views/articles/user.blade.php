@@ -46,13 +46,8 @@
                                                 @foreach ($article->categories as $category)
                                                 <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>
                                                 @endforeach
-                                                {{-- <div>
-                                                    @foreach ($article->categories as $category)
-                                                    <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>
-                                                    @endforeach
-                                                </div> --}}
                                             </td>
-                                            <td class=" px-4 py-2 ">{{ Str::limit($article->content, 100) }}...</td>
+                                            <td class=" px-4 py-2 ">{{ Str::limit($article->content, 100, $end="...") }}</td>
 
                                             <td class=" px-4 py-2 flex justify-center">
                                                 <a href="{{route('articles.edit', ['article'=>$article])}}" class="w-32 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Update</a>
