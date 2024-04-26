@@ -35,7 +35,7 @@
                                     </x-primary-button>
                                 </div>
                                     {{-- get success message if any is received from server--}}
-                                    <div class="my-4 w-2/3 ps-24 flex justify-center items-center">
+                                    <div class="my-4 w-2/3 flex justify-center items-center">
                                     @if (session('success'))
                                         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
                                             <strong class="font-bold">Success!</strong>
