@@ -29,8 +29,7 @@ class ArticleFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Article $article) {
-            // Attacher des catégories aux articles
-            $categories = Category::factory()->count(rand(1, 3))->create();
+            $categories = Category::all()->random(rand(1, 3));
             $article->categories()->attach($categories);
         });
     }

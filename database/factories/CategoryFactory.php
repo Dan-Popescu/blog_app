@@ -71,7 +71,6 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->randomElement($this->categories),
-            'color' => $this->faker->hexColor,
         ];
     }
 }

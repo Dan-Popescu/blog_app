@@ -29,7 +29,7 @@
                                     @endif
                                     <div class="mt-4">
                                         <label for="color">{{__('Pick a color')}}</label>
-                                        <x-color-picker name="color" label="Choose a color"/>
+                                        <x-color-picker name="color" value="#589DD6"/>
                                     </div>
                                     
                                 </div>
