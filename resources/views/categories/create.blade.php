@@ -27,7 +27,14 @@
                                         <span class="block sm:inline">{{ __($errors->first('name'))}}</span>
                                     </div>
                                     @endif
+                                    <div class="mt-4">
+                                        <label for="color">Pick a color</label>
+                                        <x-color-picker name="color" />
+                                    </div>
+                                    
                                 </div>
+                                
+                                
 
                                 <div class="my-4 w-full flex justify-center items-center">
                                     <x-primary-button class="w-32 flex justify-center ">

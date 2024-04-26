@@ -21,10 +21,10 @@
                     {{-- Display user details : whether it's an admin or not --}}
                     @if (Auth::user()->is_admin)
                         {{-- User is admin --}}
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('categories.manage.*')">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                             {{ __('Manage users') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('categories.manage')" :active="request()->routeIs('categories.manage.*')">
+                        <x-nav-link :href="route('categories.manage')" :active="request()->routeIs('categories.manage')">
                             {{ __('Manage categories') }}
                         </x-nav-link>
                     @else

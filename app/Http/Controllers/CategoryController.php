@@ -35,8 +35,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:categories', 'regex:/^[A-Za-z\s]+([-][A-Za-z\s]+)*$/'],
+            'color' => 'required|string|max:7|regex:/^#[a-fA-F0-9]{6}$/',
         ]);
 
         Category::create($request->all());
