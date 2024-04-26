@@ -28,5 +28,7 @@ class remigrate_and_seed extends Command
         $this->call('migrate:fresh');
         $this->call('db:seed', ['--class' => 'DatabaseSeeder']);
         $this->call('db:seed', ['--class' => 'CategoriesTableSeeder']);
+        $this->call('db:seed', ['--class' => 'UsersSeeder']);
+        $this->call('db:seed', ['--class' => 'ArticlesSeeder']);
     }
 }

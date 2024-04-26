@@ -46,9 +46,9 @@
                     <div>
                         <form action="{{route("comments.store")}}" method="POST" class="mb-4">
                             @csrf
-                            <textarea name="content" id="content" cols="30" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 h-20 mb-4" placeholder="Write your comment here..."></textarea>
+                            <textarea name="content" id="content" cols="30" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 h-20 mb-4" placeholder="{{__("Write your comment here...")}}"></textarea>
                             <input type="hidden" name="article_id" value="{{$article->id}}">
-                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Comment</button>
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">{{__("Comment")}}</button>
                         </form>
                         <div class="border-t pt-4">
                             @foreach ($comments as $comment)
@@ -60,11 +60,11 @@
                                     <span class="text-gray-600 text-sm">{{ date('\L\e d/m/Y à h:i', strtotime($comment->created_at)); }}</span>
                                 </div>
                                 @if ($comment->user_id == Auth::id())
-                                <a href="{{route('comments.edit', ['comment'=>$comment])}}" class="w-24 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Update</a>
+                                <a href="{{route('comments.edit', ['comment'=>$comment])}}" class="text-nowrap py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">{{__("Update")}}</a>
                                 <form action="{{route('comments.destroy', ['comment'=>$comment])}}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button class="w-24 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                                    <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">{{__("Delete")}}</button>
                                 </form>
                                 
                                 @endif

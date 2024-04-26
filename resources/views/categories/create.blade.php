@@ -29,7 +29,7 @@
                                     @endif
                                     <div class="mt-4">
                                         <label for="color">Pick a color</label>
-                                        <x-color-picker name="color" />
+                                        <x-color-picker name="color" default='#42445a' />
                                     </div>
                                     
                                 </div>
