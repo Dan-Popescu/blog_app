@@ -10,9 +10,6 @@ use App\Http\Controllers\UserController;
 
 Route::get('lang/{lang}', [LanguageController::class, 'changeLanguage'])->name('lang.switch');
 
-
-
-
 Route::middleware(['auth', 'locale'])->group(function () {
 
     // User profile
@@ -31,23 +28,13 @@ Route::middleware(['auth', 'locale'])->group(function () {
         Route::delete('/delete', [CategoryController::class, 'deleteCategories'])->name('delete');
     });
 
-    Route::resource('/users', UserController::class);
-
-    Route::resource('/categories', CategoryController::class)->names([
-        'index' => 'categories.index',
-        'create' => 'categories.create',
-        'store' => 'categories.store',
-        'show' => 'categories.show',
-        'edit' => 'categories.edit',
-        'update' => 'categories.update',
-        'destroy' => 'categories.destroy',
-    ]);
+    Route::resource('users', UserController::class);
+    Route::resource('categories', CategoryController::class);
 
 });
 
 Route::middleware('locale')->group(function () {
     Route::get('/', [ArticleController::class, 'index'])->name('articles.index');
-    // Route::resource('articles', ArticleController::class)->only(['index', 'show']);
     Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
     Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
     Route::get('/articles/category/{category}', [ArticleController::class, 'categoryArticles'])->name('articles.category');
