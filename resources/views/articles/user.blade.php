@@ -44,9 +44,13 @@
                                             <td class="px-4 py-2 ">
                                                 {{-- Display all categories related to the article --}}
                                                 @foreach ($article->categories as $category)
-                                                    <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>
+                                                <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>
                                                 @endforeach
-                                                {{-- {{ $article->category->name }} --}}
+                                                {{-- <div>
+                                                    @foreach ($article->categories as $category)
+                                                    <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>
+                                                    @endforeach
+                                                </div> --}}
                                             </td>
                                             <td class=" px-4 py-2 ">{{ Str::limit($article->content, 100) }}...</td>
 

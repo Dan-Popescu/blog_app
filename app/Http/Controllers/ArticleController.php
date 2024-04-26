@@ -42,6 +42,7 @@ class ArticleController extends Controller
         $articles = Article::query()->where('user_id', auth()->id())->select(['id', 'title', 'content', 'created_at'])->latest('created_at')->with('categories')->paginate(10);
 
         // dd($articles);
+        // dd($articles->first()->categories);
 
         return view('articles.user', ['articles'=> $articles]);
     }
@@ -76,9 +77,6 @@ class ArticleController extends Controller
             'categories' => 'bail|required|array',
             'categories.*' => ['bail', 'required', Rule::in(Category::query()->pluck('id')->toArray())]
         ]);
-
-        // dd($validated_data);
-
 
         // store article
         $article = new Article();
@@ -151,7 +149,6 @@ class ArticleController extends Controller
 
     public function search(Request $request)
     {
-        dd($request);
         $query = $request->input('query');
         $articles = Article::search($query)->get();
 
