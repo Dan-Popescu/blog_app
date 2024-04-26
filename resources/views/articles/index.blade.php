@@ -39,11 +39,11 @@
                                     <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                                         <ul class="py-2 text-sm text-gray-700 h-40 overflow-y-scroll" aria-labelledby="dropdown-button">
                                             <li>
-                                                <a href="{{route("articles.index")}}" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">All categories</a>
+                                                <a href="{{route("articles.index")}}" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">{{ __('All categories') }}</a>
                                             </li>
                                         @foreach ($categories as $category)
                                             <li>
-                                                <a href="{{route("articles.category",['category'=>$category])}}" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 " style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{$category->name}}</a>
+                                                <a href="{{route("articles.category",['category'=>$category])}}" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 " style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "white" : "black"}}">{{$category->name}}</a>
                                             </li>
                                         @endforeach
                                         </ul>
@@ -68,7 +68,7 @@
                                     <li class="bg-blue-50 rounded-lg p-2 px-3 m-2 flex flex-col hover:bg-blue-100">
                                         <div>
                                             @foreach ($article->categories as $category)
-                                            <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>
+                                            <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "white" : "black"}}">{{ $category->name }}</span>
                                             @endforeach
                                         </div>
                                         
