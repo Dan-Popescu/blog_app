@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CategoryFactory extends Factory
 {
-    protected $categories = [
+    protected         $categories = [
         'Action',
         'Adventure',
         'Role-playing',
@@ -62,7 +62,6 @@ class CategoryFactory extends Factory
         'Turn-based Strategy',
         'Visual Novel',
     ];
-
     /**
      * Define the model's default state.
      *
@@ -71,11 +70,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            //"name"=> $this->faker->word,
-            "color"=> $this->faker->hexColor,
-            // Affect name ramdomly based on values definied in $ategories array
-            "name"=> $this->faker->randomElement($this->categories),
-            
+            'name' => $this->faker->randomElement($this->categories),
+            'color' => $this->faker->hexColor,
         ];
     }
 }

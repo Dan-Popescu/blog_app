@@ -31,7 +31,7 @@
 
                             <div class="max-w-full mx-auto mt-6">
                                 <div class="flex">
-                                    <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Your Email</label>
+                                    <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only ">{{ __('Your Email') }}</label>
                                     <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 " type="button">{{__("All categories")}} <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                     </svg>
@@ -39,7 +39,7 @@
                                     <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                                         <ul class="py-2 text-sm text-gray-700 h-40 overflow-y-scroll" aria-labelledby="dropdown-button">
                                             <li>
-                                                <a href="{{route("articles.index")}}" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">{{__("All categories")}}</a>
+                                                <a href="{{route("articles.index")}}" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">{{ __('All categories') }}</a>
                                             </li>
                                         @foreach ($categories as $category)
                                             <li class="px-4 py-2 hover:bg-gray-100">
@@ -55,7 +55,7 @@
                                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                                 </svg>
-                                                <span class="sr-only">Search</span>
+                                                <span class="sr-only">{{__('Search')}}</span>
                                             </button>
                                         </form>
                                     </div>
@@ -68,7 +68,7 @@
                                     <li class="bg-blue-50 rounded-lg p-2 px-3 m-2 flex flex-col hover:bg-blue-100">
                                         <div>
                                             @foreach ($article->categories as $category)
-                                            <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "black" : "white"}}">{{ $category->name }}</span>
+                                            <span class='py-0.5 px-2 rounded-md' style="background-color:{{$category->color}}; color:{{isColorDark($category->color)? "white" : "black"}}">{{ $category->name }}</span>
                                             @endforeach
                                         </div>
                                         
